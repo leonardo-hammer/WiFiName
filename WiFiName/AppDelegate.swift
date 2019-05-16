@@ -18,7 +18,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength);
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        // Add menu
+        let menu = NSMenu()
+        let exitItem = NSMenuItem(title: "Exit", action: #selector(exitAction), keyEquivalent:"")
+        menu.addItem(exitItem)
+
+        statusItem.menu = menu
+
         let interface = wifiClient.interface();
 
         let button = statusItem.button
@@ -37,6 +43,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+
+    @objc func exitAction() {
+        exit(0)
     }
 }
 
